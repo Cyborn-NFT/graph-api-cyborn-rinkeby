@@ -1,0 +1,23 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: CybornMarket
+    network: rinkeby
+    source:
+      address: "0x8f0191295805e620B0979Be766216eDB5d22C4f6"
+      abi: CybornMarket
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - MarketItemCreated
+      abis:
+        - name: CybornMarket
+          file: ./abis/CybornMarket.json
+      eventHandlers:
+        - event: MarketItemCreated(indexed uint256,indexed address,indexed uint256,address,address,uint256,bool)
+          handler: handleMarketItemCreated
+      file: ./src/mapping.ts
